@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="boostrap4/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <div class="main-warp">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-11 my-5 mx-auto">
+                    <div class="row">
+                        <div class="col-md-6 left">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <div class="title text-center border-box">
+                                      <h4 class="m-0">Foods</h4>
+                                  </div>
+                                  <div class="food-list">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="title text-center border-box">
+                                        <h4 class="m-0">Drinks</h4>
+                                    </div>
+                                    <div class="drink-list">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="title text-center border-box">
+                                        <h4 class="m-0">Ordered</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="title text-center border-box">
+                                                <h4 class="m-0">Total</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="title text-center border-box">
+                                                <h4 class="m-0">Price</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 list-ordered">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="boostrap4/jquery.min.js"></script>
+    <script src="boostrap4/bootstrap.min.js"></script>
+    <script src="boostrap4/popper.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            let foods = [
+                {
+                    id: 1,
+                    name: "bakso",
+                    price: "10000"
+                },
+                {
+                    id: 2,
+                    name: "tekwan",
+                    price: "12000"
+                }
+            ]
+
+            $.each(foods, function(i,v){
+                $('.food-list').append(`
+                   <div class="warp btn-food" id="${v.id}">
+                     <div class="food-name">
+                       ${v.name}
+                     </div>
+                     <div class="food-price">
+                        <span>Rp</span> <span class="main-price"> ${v.price} </span>
+                     </div>
+                   </div>
+                `);
+            })
+
+           
+           let allOrder = []
+            $('.btn-food').click(function(){
+                let foodName = $(this).find('.food-name').html();
+                let foodId = $(this).attr('id');
+                let foodPrice = $(this).find('.main-price').html();
+                let count = 1;
+                if(!allOrder.includes(foodName)){
+                    $('.list-ordered').append(`
+                       <div class="warp-ordered text-center">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="order-name warp">
+                                        ${foodName}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                              
+                                        <div class="total">
+                                            <input type="text" class="form-control" value="1">
+                                            <div class="price warp" id="${foodPrice}">
+                                              ${foodPrice}
+                                            </div>
+                                        </div>
+                                
+                                      
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                    allOrder.push(foodName);
+                 }
+            })
+            
+            
+            $(document).on('change','.form-control',function(){ 
+                let total = parseFloat($(this).val())
+                let priceAsli = parseFloat($(this).next().attr("id")); 
+                console.log(priceAsli)   
+                $(this).next().html(total * priceAsli)
+            });
+
+      
+        })
+
+    
+
+        
+    </script>
+</body>
+</html>

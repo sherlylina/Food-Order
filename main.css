@@ -1,0 +1,22 @@
+.border-box{
+    border: 1px solid #9f9f9f;
+    padding: 8px 0px;
+}
+
+ .warp{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #61f7f7;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 8px;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 4px #BEBEBE;
+    cursor: pointer
+}
+
+.form-control{
+    margin: 10px 0px;
+    border: none;
+}
